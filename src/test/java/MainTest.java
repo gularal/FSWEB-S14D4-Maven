@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
@@ -21,7 +22,6 @@ public class MainTest {
     ProductForSale bread;
     ProductForSale chocolate;
     ProductForSale coke;
-
     Monster troll;
 
     @BeforeEach
@@ -34,19 +34,19 @@ public class MainTest {
 
     @DisplayName("Subclasslar Superclass değişkenlerinin değerlerine ulaşabiliyor mu?")
     @Test
-    public void testProductForSaleAccessModifiers() throws NoSuchFieldException {
-        assertEquals(bread.getType(), "Test");
-        assertEquals(bread.getPrice(), 10);
-        assertEquals(bread.getDescription(), "Test Bread");
+    public void testProductForSaleAccessModifiers() {
+        assertEquals("Test", bread.getType());
+        assertEquals(10, bread.getPrice());
+        assertEquals("Test Bread", bread.getDescription());
 
-        assertEquals(chocolate.getType(), "Test");
-        assertEquals(chocolate.getPrice(), 10);
-        assertEquals(chocolate.getDescription(), "Test Chocolate");
+        assertEquals("Test", chocolate.getType());
+        assertEquals(10, chocolate.getPrice());
+        assertEquals("Test Chocolate", chocolate.getDescription());
     }
 
     @DisplayName("Tüm sınıflar doğru sınıftan türüyorlar mı?")
     @Test
-    public void testLampAccessModifiers() throws NoSuchFieldException {
+    public void testClassInheritance() {
         assertThat(bread, instanceOf(ProductForSale.class));
         assertThat(chocolate, instanceOf(ProductForSale.class));
         assertThat(coke, instanceOf(ProductForSale.class));
@@ -54,34 +54,35 @@ public class MainTest {
 
     @DisplayName("getSalesPrice doğru sonuçlar üretiyor mu?")
     @Test
-    public void testGetSalesPrice() throws NoSuchFieldException {
-        assertEquals(bread.getSalesPrice(3), 30);
-        assertEquals(chocolate.getSalesPrice(5), 50);
-        assertEquals(coke.getSalesPrice(4), 40);
+    public void testGetSalesPrice() {
+        assertEquals(30, bread.getSalesPrice(3));
+        assertEquals(50, chocolate.getSalesPrice(5));
+        assertEquals(40, coke.getSalesPrice(4));
     }
 
-    @DisplayName("showDetails methodu tanımlanmış mı?")
+    @DisplayName("showDetails metodu tanımlanmış mı ve public mi?")
     @Test
     public void testShowDetails() throws NoSuchMethodException {
         Method showDetailsMethod = bread.getClass().getDeclaredMethod("showDetails");
-        assertEquals(showDetailsMethod.getModifiers(), 1);
+        assertEquals(Modifier.PUBLIC, showDetailsMethod.getModifiers() & Modifier.PUBLIC);
     }
 
-    @DisplayName("Troll sınıfı doğru değişkenlere tiplerine sahip mi ?")
+    @DisplayName("Troll sınıfı doğru değişken tiplerine sahip mi?")
     @Test
-    public void testTrollDataTypes() throws NoSuchFieldException {
+    public void testTrollDataTypes() {
         assertThat(troll.getName(), instanceOf(String.class));
         assertThat(troll.getHitPoints(), instanceOf(Integer.class));
-        assertThat(troll.getDamage(), instanceOf(Double.class));
 
-        assertEquals(troll.getName(), "Shrek");
-        assertEquals(troll.getHitPoints(), 1000);
-        assertEquals(troll.getDamage(), 100);
+
+        assertEquals(100.0, troll.getDamage());
+
+        assertEquals("Shrek", troll.getName());
+        assertEquals(1000, troll.getHitPoints());
     }
 
-    @DisplayName("attack methodu doğru çalışıyor mu ?")
+    @DisplayName("attack metodu doğru çalışıyor mu?")
     @Test
     public void testAttackMethod() {
-       assertEquals(troll.attack(), 155.0);
+        assertEquals(155.0, troll.attack());
     }
 }
