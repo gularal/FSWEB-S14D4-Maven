@@ -1,15 +1,15 @@
 package org.example.model;
 
 public class Coke extends ProductForSale {
-    private boolean salty;
+    private boolean isDiet;
 
-    public Coke(double price, String description, boolean salty) {
+    public Coke(double price, String description, boolean isDiet) {
         super("Coke", price, description);
-        this.salty = salty;
+        this.isDiet = isDiet;
     }
 
-    public boolean salty() {
-        return salty;
+    public boolean isDiet() {
+        return isDiet;
     }
 
     @Override
@@ -17,6 +17,6 @@ public class Coke extends ProductForSale {
         System.out.println("Product Type: " + getType());
         System.out.println("Price: $" + getPrice());
         System.out.println("Description: " + getDescription());
-        System.out.println("Salty: " + (salty ? "Yes" : "No"));
+        System.out.println("Diet: " + (isDiet ? "Yes" : "No"));
     }
 }

@@ -1,15 +1,15 @@
 package org.example.model;
 
 public class Chocolate extends ProductForSale {
-    private int cocoa;
+    private int cocoaPercentage;
 
-    public Chocolate(double price, String description, int cocoa) {
+    public Chocolate(double price, String description, int cocoaPercentage) {
         super("Chocolate", price, description);
-        this.cocoa = cocoa;
+        this.cocoaPercentage = cocoaPercentage;
     }
 
     public int getCocoaPercentage() {
-        return cocoa;
+        return cocoaPercentage;
     }
 
     @Override
@@ -17,6 +17,6 @@ public class Chocolate extends ProductForSale {
         System.out.println("Product Type: " + getType());
         System.out.println("Price: $" + getPrice());
         System.out.println("Description: " + getDescription());
-        System.out.println("Cocoa: " + cocoa + "%");
+        System.out.println("Cocoa Percentage: " + cocoaPercentage + "%");
     }
 }

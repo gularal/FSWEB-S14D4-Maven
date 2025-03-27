@@ -1,15 +1,15 @@
 package org.example.model;
 
 public class Bread extends ProductForSale {
-    private String Bran;
+    private String flourType;
 
-    public Bread(double price, String description, String Bran) {
+    public Bread(double price, String description, String flourType) {
         super("Bread", price, description);
-        this.Bran = Bran;
+        this.flourType = flourType;
     }
 
-    public String getBran() {
-        return Bran;
+    public String getFlourType() {
+        return flourType;
     }
 
     @Override
@@ -17,6 +17,6 @@ public class Bread extends ProductForSale {
         System.out.println("Product Type: " + getType());
         System.out.println("Price: $" + getPrice());
         System.out.println("Description: " + getDescription());
-        System.out.println("Bran: " + Bran);
+        System.out.println("Flour Type: " + flourType);
     }
 }
